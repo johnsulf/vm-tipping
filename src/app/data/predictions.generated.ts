@@ -1,5 +1,5 @@
 // AUTO-GENERERT av scripts/import-data.mjs — ikke rediger manuelt.
-// Kilde: data/google_sheet.csv (24 deltakere, 34 spørsmål).
+// Kilde: data/google_sheet.csv (26 deltakere, 34 spørsmål).
 
 export type QuestionId =
   | 'apningskamp-vinner'
@@ -49,7 +49,7 @@ export interface AnswerOptions {
   'norge-frankrike': "Det blir uavgjort" | "Ja, Norge vinner" | "Nei, Frankrike vinner" | (string & {});
   'haaland-mal': "1-2 mål" | "3-4 mål" | "5 mål eller flere" | (string & {});
   'gruppe-a': "Mexico" | "Sør-Afrika" | "Sør-Korea" | "Tsjekkia" | (string & {});
-  'gruppe-b': "Bosnia-Hercegovina" | "Qatar" | "Sveits" | (string & {});
+  'gruppe-b': "Bosnia-Hercegovina" | "Canada" | "Qatar" | "Sveits" | (string & {});
   'gruppe-c': "Brasil" | "Marokko" | "Skottland" | (string & {});
   'gruppe-d': "Australia" | "Paraguay" | "Tyrkia" | "USA" | (string & {});
   'gruppe-e': "Elfenbenskysten" | "Tyskland" | (string & {});
@@ -60,7 +60,7 @@ export interface AnswerOptions {
   'gruppe-j': "Algerie" | "Argentina" | "Østerrike" | (string & {});
   'gruppe-k': "Colombia" | "Portugal" | (string & {});
   'gruppe-l': "England" | "Kroatia" | (string & {});
-  'vm-vinner': "Brasil" | "England" | "Frankrike" | "Nederland" | "Portugal" | "Spania" | "Tyskland" | (string & {});
+  'vm-vinner': "Argentina" | "Brasil" | "England" | "Frankrike" | "Nederland" | "Portugal" | "Spania" | "Tyskland" | (string & {});
   'finale-taper': "Argentina" | "Brasil" | "England" | "Frankrike" | "Portugal" | "Spania" | "Tyskland" | (string & {});
   'finale-mal': "1" | "2" | "3" | "4" | "5 eller flere" | (string & {});
   'finale-straffekonk': "Ja" | "Nei" | (string & {});
@@ -69,10 +69,10 @@ export interface AnswerOptions {
   'toppskarer': "Cristiano Ronaldo" | "Erling Braut Haaland (Norge)" | "Harry Kane (England)" | "Kylian Mbappé (Frankrike)" | "Lamine Yamal (Spania)" | "Lionel Messi (Argentina)" | "Ousmane Dembélé (Frankrike)" | (string & {});
   'beste-spiller': "Antonio Nusa" | "Bruno Fernandes" | "Erling Braut Haaland (Norge)" | "Harry Kane (England)" | "Kylian Mbappé (Frankrike)" | "Lamine Yamal (Spania)" | "Lionel Messi (Argentina)" | "Vinícius Júnior (Brasil)" | (string & {});
   'totalt-mal': "200-230 mål" | "231-260 mål" | "261-290 mål" | "Over 290 mål" | "Under 200 mål" | (string & {});
-  'flest-gule-kort': "Argentina" | "Bosnia-Hercegovina" | "Brasil" | "Colombia" | "Curaçao" | "England" | "Frankrike" | "Kroatia" | "Mexico" | "Nederland" | "Paraguay" | "Portugal" | "Spania" | "Uruguay" | "USA" | (string & {});
-  'flest-rode-kort': "Algerie" | "Argentina" | "Bosnia-Hercegovina" | "Brasil" | "Haiti" | "Irak" | "Iran" | "Marokko" | "Mexico" | "Paraguay" | "Portugal" | "Senegal" | "Tyrkia" | "Tyskland" | "Uruguay" | "USA" | (string & {});
+  'flest-gule-kort': "Argentina" | "Bosnia-Hercegovina" | "Brasil" | "Colombia" | "Curaçao" | "England" | "Frankrike" | "Kroatia" | "Mexico" | "Nederland" | "Paraguay" | "Portugal" | "Spania" | "Tyskland" | "Uruguay" | "USA" | (string & {});
+  'flest-rode-kort': "Algerie" | "Argentina" | "Bosnia-Hercegovina" | "Brasil" | "Haiti" | "Irak" | "Iran" | "Marokko" | "Mexico" | "Paraguay" | "Portugal" | "Senegal" | "Spania" | "Tyrkia" | "Tyskland" | "Uruguay" | "USA" | (string & {});
   'flest-mal-scoret': "Brasil" | "England" | "Frankrike" | "Portugal" | "Spania" | "Tyskland" | (string & {});
-  'flest-mal-sluppet-inn': "Canada" | "Curaçao" | "DR Kongo" | "Egypt" | "Haiti" | "Irak" | "Jordan" | "Kapp Verde" | "Panama" | "Tsjekkia" | "Tyskland" | "Uruguay" | "Usbekistan" | "Østerrike" | (string & {});
+  'flest-mal-sluppet-inn': "Canada" | "Curaçao" | "DR Kongo" | "Egypt" | "Haiti" | "Irak" | "Jordan" | "Kapp Verde" | "Panama" | "Tsjekkia" | "Tyrkia" | "Tyskland" | "Uruguay" | "Usbekistan" | "Østerrike" | (string & {});
 }
 
 export interface Participant {
@@ -1066,6 +1066,88 @@ export const PARTICIPANTS: readonly Participant[] = [
       "flest-mal-scoret": "Spania",
       "flest-mal-sluppet-inn": "Tsjekkia"
     }
+  },
+  {
+    "name": "Katarina Kroken",
+    "slug": "katarina-kroken",
+    "timestamp": "6/11/2026 15:15:39",
+    "answers": {
+      "apningskamp-vinner": "Sør-Afrika",
+      "apningskamp-mal": "2",
+      "apningskamp-straffe": "Ja",
+      "apningskamp-corner": "Mexico",
+      "apningskamp-rodt-kort": "Nei",
+      "norge-progresjon": "Til kvartfinale",
+      "norge-poeng": "4-6 poeng",
+      "norge-frankrike": "Det blir uavgjort",
+      "haaland-mal": "3-4 mål",
+      "gruppe-a": "Sør-Afrika",
+      "gruppe-b": "Sveits",
+      "gruppe-c": "Brasil",
+      "gruppe-d": "USA",
+      "gruppe-e": "Tyskland",
+      "gruppe-f": "Nederland",
+      "gruppe-g": "Belgia",
+      "gruppe-h": "Spania",
+      "gruppe-i": "Frankrike",
+      "gruppe-j": "Argentina",
+      "gruppe-k": "Portugal",
+      "gruppe-l": "Kroatia",
+      "vm-vinner": "Frankrike",
+      "finale-taper": "Spania",
+      "finale-mal": "3",
+      "finale-straffekonk": "Nei",
+      "finale-rodt-kort": "Nei",
+      "finale-banestormer": "Ja",
+      "toppskarer": "Erling Braut Haaland (Norge)",
+      "beste-spiller": "Kylian Mbappé (Frankrike)",
+      "totalt-mal": "Under 200 mål",
+      "flest-gule-kort": "Tyskland",
+      "flest-rode-kort": "Spania",
+      "flest-mal-scoret": "Frankrike",
+      "flest-mal-sluppet-inn": "Tyrkia"
+    }
+  },
+  {
+    "name": "Paul",
+    "slug": "paul",
+    "timestamp": "6/11/2026 15:20:23",
+    "answers": {
+      "apningskamp-vinner": "Mexico",
+      "apningskamp-mal": "1",
+      "apningskamp-straffe": "Nei",
+      "apningskamp-corner": "Sør-Afrika",
+      "apningskamp-rodt-kort": "Nei",
+      "norge-progresjon": "Til 8-delsfinale",
+      "norge-poeng": "4-6 poeng",
+      "norge-frankrike": "Det blir uavgjort",
+      "haaland-mal": "5 mål eller flere",
+      "gruppe-a": "Mexico",
+      "gruppe-b": "Canada",
+      "gruppe-c": "Brasil",
+      "gruppe-d": "USA",
+      "gruppe-e": "Tyskland",
+      "gruppe-f": "Nederland",
+      "gruppe-g": "Belgia",
+      "gruppe-h": "Spania",
+      "gruppe-i": "Frankrike",
+      "gruppe-j": "Argentina",
+      "gruppe-k": "Portugal",
+      "gruppe-l": "England",
+      "vm-vinner": "Argentina",
+      "finale-taper": "Frankrike",
+      "finale-mal": "3",
+      "finale-straffekonk": "Nei",
+      "finale-rodt-kort": "Nei",
+      "finale-banestormer": "Nei",
+      "toppskarer": "Harry Kane (England)",
+      "beste-spiller": "Lamine Yamal (Spania)",
+      "totalt-mal": "231-260 mål",
+      "flest-gule-kort": "Brasil",
+      "flest-rode-kort": "Brasil",
+      "flest-mal-scoret": "Brasil",
+      "flest-mal-sluppet-inn": "Curaçao"
+    }
   }
 ];
 
@@ -1124,6 +1206,7 @@ export const OBSERVED_ANSWERS: Readonly<Record<QuestionId, readonly string[]>> =
   ],
   "gruppe-b": [
     "Bosnia-Hercegovina",
+    "Canada",
     "Qatar",
     "Sveits"
   ],
@@ -1173,6 +1256,7 @@ export const OBSERVED_ANSWERS: Readonly<Record<QuestionId, readonly string[]>> =
     "Kroatia"
   ],
   "vm-vinner": [
+    "Argentina",
     "Brasil",
     "England",
     "Frankrike",
@@ -1249,6 +1333,7 @@ export const OBSERVED_ANSWERS: Readonly<Record<QuestionId, readonly string[]>> =
     "Paraguay",
     "Portugal",
     "Spania",
+    "Tyskland",
     "Uruguay",
     "USA"
   ],
@@ -1265,6 +1350,7 @@ export const OBSERVED_ANSWERS: Readonly<Record<QuestionId, readonly string[]>> =
     "Paraguay",
     "Portugal",
     "Senegal",
+    "Spania",
     "Tyrkia",
     "Tyskland",
     "Uruguay",
@@ -1289,6 +1375,7 @@ export const OBSERVED_ANSWERS: Readonly<Record<QuestionId, readonly string[]>> =
     "Kapp Verde",
     "Panama",
     "Tsjekkia",
+    "Tyrkia",
     "Tyskland",
     "Uruguay",
     "Usbekistan",
