@@ -21,31 +21,18 @@
         <th scope="col">Plass</th>
         <th scope="col">Navn</th>
         <th scope="col">Poeng</th>
-        <th scope="col">Riktige svar</th>
       </tr>
     </thead>
     <tbody>
       @for (row of rows(); track row.participant.slug) {
         <tr>
-          <td>
-            {{ row.rank }}.
-            @if (medal(row.rank); as m) {
-              <span aria-hidden="true">{{ m }}</span>
-            }
-          </td>
+          <td>{{ row.rank }}.</td>
           <td>
             <a hviLink [routerLink]="['/deltaker', row.participant.slug]">
               {{ row.participant.name }}
             </a>
           </td>
           <td>{{ row.score.points }}</td>
-          <td>
-            @if (row.score.settled > 0) {
-              {{ row.score.correct }} av {{ row.score.settled }} avgjorte
-            } @else {
-              -
-            }
-          </td>
         </tr>
       }
     </tbody>

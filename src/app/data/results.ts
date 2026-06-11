@@ -20,7 +20,6 @@ export const FASIT: Fasit = {
   // 'apningskamp-vinner': ,
   // 'apningskamp-mal': ,
   // 'apningskamp-straffe': ,
-  // 'apningskamp-straffe': ,
   // 'apningskamp-corner': ,
   // 'apningskamp-rodt-kort': ,
   // --- Norge i VM ---
