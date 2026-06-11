@@ -1,0 +1,53 @@
+<h1 hviHeading size="lg">Leaderboard</h1>
+
+@if (settledCount() === 0) {
+  <hvi-alert color="info" class="mt-4 block">
+    Ingen resultater er registrert ennå – alle starter med 0 poeng. Poengene kommer fortløpende
+    etter hvert som kampene spilles.
+  </hvi-alert>
+} @else {
+  <p class="mt-2 text-gray-700">
+    {{ settledCount() }} av {{ questionCount }} spørsmål er avgjort. 1 poeng per riktig svar.
+  </p>
+}
+
+<div class="mt-6 overflow-x-auto">
+  <table hviTable zebra hover border class="w-full">
+    <caption class="sr-only">
+      Rangering av deltakerne i tippekonkurransen etter antall poeng
+    </caption>
+    <thead>
+      <tr>
+        <th scope="col">Plass</th>
+        <th scope="col">Navn</th>
+        <th scope="col">Poeng</th>
+        <th scope="col">Riktige svar</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (row of rows(); track row.participant.slug) {
+        <tr>
+          <td>
+            {{ row.rank }}.
+            @if (medal(row.rank); as m) {
+              <span aria-hidden="true">{{ m }}</span>
+            }
+          </td>
+          <td>
+            <a hviLink [routerLink]="['/deltaker', row.participant.slug]">
+              {{ row.participant.name }}
+            </a>
+          </td>
+          <td>{{ row.score.points }}</td>
+          <td>
+            @if (row.score.settled > 0) {
+              {{ row.score.correct }} av {{ row.score.settled }} avgjorte
+            } @else {
+              –
+            }
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

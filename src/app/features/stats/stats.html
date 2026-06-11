@@ -1,0 +1,85 @@
+<h1 hviHeading size="lg">Statistikk og moro</h1>
+<p class="mt-2 text-gray-700">Litt kuriosa fra tipperunden – helt uten poengverdi.</p>
+
+<section class="mt-8">
+  <h2 hviHeading size="sm">Hvem vinner VM?</h2>
+  <div class="mt-4 max-w-2xl">
+    <app-answer-bars [distribution]="vmVinnerFordeling()" [total]="total" />
+  </div>
+</section>
+
+<div class="mt-8 grid gap-6 md:grid-cols-2">
+  <hvi-card color="neutral" variant="tinted" class="block">
+    <h2 hviHeading size="xs">Folkets favoritter</h2>
+    <p class="mt-1 text-sm text-gray-700">Spørsmålene der flest er enige.</p>
+    <ul class="mt-3 space-y-2">
+      @for (pick of konsensus(); track pick.question.id) {
+        <li>
+          <a hviLink color="neutral" [routerLink]="['/sporsmal', pick.question.id]">
+            {{ pick.question.label }}
+          </a>
+          – <strong>{{ pick.answer }}</strong>&nbsp;<span class="text-sm text-gray-700">({{ pick.count }} av {{ pick.total }})</span>
+        </li>
+      }
+    </ul>
+  </hvi-card>
+
+  <hvi-card color="neutral" variant="tinted" class="block">
+    <h2 hviHeading size="xs">Outsiderne</h2>
+    <p class="mt-1 text-sm text-gray-700">Flest svar ingen andre har tippet.</p>
+    <ul class="mt-3 space-y-3">
+      @for (outsider of outsidere(); track outsider.participant.slug) {
+        <li>
+          <a hviLink [routerLink]="['/deltaker', outsider.participant.slug]">
+            {{ outsider.participant.name }}
+          </a>
+          <span class="text-sm text-gray-700">
+            – {{ outsider.uniqueAnswers.length }} unike svar
+          </span>
+          @if (outsider.uniqueAnswers.length > 0) {
+            <p class="mt-1 text-sm text-gray-600">
+              F.eks.
+              @for (unique of outsider.uniqueAnswers.slice(0, 2); track unique.question.id) {
+                {{ unique.question.label }}: «{{ unique.answer }}»{{ !$last ? ', ' : '' }}
+              }
+            </p>
+          }
+        </li>
+      }
+    </ul>
+  </hvi-card>
+
+  <hvi-card color="neutral" variant="tinted" class="block md:col-span-2">
+    <h2 hviHeading size="xs">Norge-barometeret <span aria-hidden="true">🇳🇴</span></h2>
+    <p class="mt-1 text-sm text-gray-700">
+      Hvem tror mest på Norge? Basert på svarene om Norges vei i VM, poeng i gruppespillet,
+      Frankrike-kampen og Haalands målteft.
+    </p>
+    <div class="mt-3 grid gap-6 sm:grid-cols-2">
+      <div>
+        <h3 class="font-semibold">Størst Norge-tro</h3>
+        <ol class="mt-2 list-inside list-decimal space-y-1">
+          @for (rad of toppOptimister(); track rad.participant.slug) {
+            <li>
+              <a hviLink [routerLink]="['/deltaker', rad.participant.slug]">
+                {{ rad.participant.name }}
+              </a>
+              <span class="text-sm text-gray-700">({{ rad.score }} av {{ rad.maxScore }})</span>
+            </li>
+          }
+        </ol>
+      </div>
+      @if (pessimist(); as p) {
+        <div>
+          <h3 class="font-semibold">Minst Norge-tro</h3>
+          <p class="mt-2">
+            <a hviLink [routerLink]="['/deltaker', p.participant.slug]">
+              {{ p.participant.name }}
+            </a>
+            <span class="text-sm text-gray-700">({{ p.score }} av {{ p.maxScore }})</span>
+          </p>
+        </div>
+      }
+    </div>
+  </hvi-card>
+</div>

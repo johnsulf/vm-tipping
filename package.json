@@ -3,8 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "import:data": "node scripts/import-data.mjs",
+    "prestart": "npm run import:data",
     "start": "ng serve",
+    "prebuild": "npm run import:data",
     "build": "ng build",
+    "postbuild": "node -e \"const fs=require('node:fs');fs.copyFileSync('dist/vm-tipping/browser/index.html','dist/vm-tipping/browser/404.html')\"",
+    "build:pages": "npm run build -- --base-href /vm-tipping/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

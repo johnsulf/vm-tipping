@@ -1,60 +1,56 @@
-# VmTipping
+# VM-tipping 2026
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.1.
+Nettside for tippekonkurransen om VM i fotball 2026: hva alle har tippet, poeng underveis,
+leaderboard og litt statistikk-moro. Bygget med Angular 22, Tailwind og
+[@helsevestikt/hviktor-angular](https://www.npmjs.com/package/@helsevestikt/hviktor-angular).
 
-## Development server
+Ingen database: tippedata og fasit ligger i repoet, og siden oppdateres ved å deploye på nytt.
 
-To start a local development server, run:
+## Slik virker dataflyten
 
-```bash
-ng serve
+```
+data/google_sheet.csv ──(scripts/import-data.mjs)──▶ src/app/data/predictions.generated.ts
+src/app/data/questions.ts   (spørsmålstekster og kategorier)
+src/app/data/results.ts     (FASIT – redigeres for hånd underveis)
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Import-scriptet kjøres automatisk før `npm start` og `npm run build`, så generert fil er alltid
+i synk med CSV-en.
 
-## Code scaffolding
+## Registrere resultater (det du gjør underveis)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+1. Åpne [src/app/data/results.ts](src/app/data/results.ts).
+2. Fjern kommentaren for spørsmålet som er avgjort og skriv inn riktig svar – du får
+   autocomplete på svarene deltakerne har gitt, men kan også skrive andre verdier.
+   Matching mot deltakersvar er case-ufølsom.
+3. Commit, push og deploy. Uutfylte spørsmål vises som «uavklart» og teller ikke i poengsummen.
 
-```bash
-ng generate component component-name
-```
+## Oppdatere tippedata (hvis Google Sheet endres)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Last ned arket på nytt som CSV og erstatt `data/google_sheet.csv`. Hvis spørsmålene har endret
+seg, må også `QUESTIONS` i `scripts/import-data.mjs` og `src/app/data/questions.ts` oppdateres –
+import-scriptet feiler med en tydelig melding hvis kolonnene ikke stemmer.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Utvikling
 
 ```bash
-ng test
+npm start          # dev-server på http://localhost:4200
+npm test           # vitest (scoring m.m.)
+npm run build      # produksjonsbygg til dist/vm-tipping/browser
 ```
 
-## Running end-to-end tests
+Krever Node 22+ (Angular CLI 22).
 
-For end-to-end (e2e) testing, run:
+## Deploy til GitHub Pages
 
 ```bash
-ng e2e
+npm run build:pages   # bygger med --base-href /vm-tipping/
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Bygget lager også en `404.html` (kopi av `index.html`) slik at dyplenker som
+`/deltaker/erlend` fungerer på GitHub Pages. Publiser innholdet i `dist/vm-tipping/browser`
+til Pages – enten manuelt eller med en GitHub Actions-workflow som kjører `npm ci` og
+`npm run build:pages` og laster opp `dist/vm-tipping/browser` som Pages-artefakt.
 
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# vm-tipping
+Hvis siden skal ligge på et annet path enn `/vm-tipping/`, juster `--base-href` i
+`build:pages`-scriptet i `package.json`.

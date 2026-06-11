@@ -1,0 +1,56 @@
+<p>
+  <a hviLink routerLink="/">← Tilbake til leaderboard</a>
+</p>
+
+@if (row(); as r) {
+  <h1 hviHeading size="lg" class="mt-4">{{ r.participant.name }}</h1>
+
+  <hvi-card color="neutral" variant="tinted" class="mt-4 block">
+    <dl class="flex flex-wrap gap-x-10 gap-y-3">
+      <div>
+        <dt class="text-sm text-gray-700">Plassering</dt>
+        <dd class="text-2xl font-bold">{{ r.rank }}. av {{ participantCount }}</dd>
+      </div>
+      <div>
+        <dt class="text-sm text-gray-700">Poeng</dt>
+        <dd class="text-2xl font-bold">{{ r.score.points }}</dd>
+      </div>
+      <div>
+        <dt class="text-sm text-gray-700">Riktige svar</dt>
+        <dd class="text-2xl font-bold">
+          {{ r.score.correct }}<span class="text-base font-normal text-gray-700">
+            av {{ r.score.settled }} avgjorte</span
+          >
+        </dd>
+      </div>
+    </dl>
+  </hvi-card>
+
+  @for (group of groups(); track group.label) {
+    <section class="mt-8">
+      <h2 hviHeading size="sm">{{ group.label }}</h2>
+      <ul class="mt-3 divide-y divide-gray-200 border-y border-gray-200">
+        @for (item of group.answers; track item.question.id) {
+          <li class="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 py-3">
+            <div>
+              <p class="text-sm text-gray-700">
+                <a hviLink color="neutral" [routerLink]="['/sporsmal', item.question.id]">
+                  {{ item.question.label }}
+                </a>
+              </p>
+              <p class="font-medium">{{ item.answer }}</p>
+            </div>
+            <hvi-tag size="sm" [color]="statusColors[item.status]">
+              {{ statusLabels[item.status] }}
+            </hvi-tag>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+} @else {
+  <hvi-alert color="warning" title="Fant ikke deltakeren" class="mt-4 block">
+    Det finnes ingen deltaker med adressen «{{ slug() }}».
+    <a hviLink routerLink="/">Gå til leaderboardet</a> for å se alle deltakerne.
+  </hvi-alert>
+}

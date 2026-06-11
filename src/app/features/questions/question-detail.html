@@ -1,0 +1,29 @@
+<p>
+  <a hviLink routerLink="/sporsmal">← Alle spørsmål</a>
+</p>
+
+@if (question(); as q) {
+  <p class="mt-4 text-sm uppercase tracking-wide text-gray-600">{{ categoryLabels[q.category] }}</p>
+  <h1 hviHeading size="lg" class="mt-1">{{ q.text }}</h1>
+  @if (q.note) {
+    <p class="mt-1 text-gray-700">{{ q.note }}</p>
+  }
+
+  @if (fasit(); as f) {
+    <hvi-alert color="success" title="Fasit" class="mt-4 block">{{ f }}</hvi-alert>
+  } @else {
+    <p class="mt-2 text-gray-700">Dette spørsmålet er ikke avgjort ennå.</p>
+  }
+
+  <section class="mt-8">
+    <h2 hviHeading size="sm">Slik har folk tippet</h2>
+    <div class="mt-4">
+      <app-answer-bars [distribution]="distribution()" [total]="total" [showParticipants]="true" />
+    </div>
+  </section>
+} @else {
+  <hvi-alert color="warning" title="Fant ikke spørsmålet" class="mt-4 block">
+    Det finnes ikke noe spørsmål med adressen «{{ id() }}».
+    <a hviLink routerLink="/sporsmal">Se alle spørsmålene</a> i stedet.
+  </hvi-alert>
+}
