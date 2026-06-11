@@ -27,6 +27,23 @@
     </dl>
   </hvi-card>
 
+  @if (identiske().length > 0) {
+    <hvi-alert color="info" title="Tippe-tvilling!" class="mt-4 block">
+      Hvis {{ r.participant.name }} vinner, vinner også
+      @for (deltaker of identiske(); track deltaker.slug) {
+        <a hviLink [routerLink]="['/deltaker', deltaker.slug]">{{ deltaker.name }}</a
+        >{{ !$last ? ', ' : '' }}
+      }
+      - de har tippet helt likt og må dele premien!
+    </hvi-alert>
+  } @else if (tvilling(); as t) {
+    <p class="mt-4 text-gray-700">
+      Mest like tipper:
+      <a hviLink [routerLink]="['/deltaker', t.other.slug]">{{ t.other.name }}</a>
+      ({{ t.alike }} av {{ t.total }} like svar).
+    </p>
+  }
+
   @for (group of groups(); track group.label) {
     <section class="mt-8">
       <h2 hviHeading size="sm">{{ group.label }}</h2>

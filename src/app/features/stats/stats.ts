@@ -2,7 +2,13 @@ import { Component, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HviCard, HviHeading, HviLink } from '@helsevestikt/hviktor-angular';
 import { DataService } from '../../core/data.service';
-import { norgeOptimister, outsiders, topConsensusPicks } from '../../core/stats';
+import {
+  identicalGroups,
+  mostSimilarPairs,
+  norgeOptimister,
+  outsiders,
+  topConsensusPicks,
+} from '../../core/stats';
 import { AnswerBars } from '../../shared/answer-bars';
 
 @Component({
@@ -26,4 +32,8 @@ export class StatsPage {
   protected readonly toppOptimister = computed(() => this.optimister().slice(0, 3));
 
   protected readonly pessimist = computed(() => this.optimister().at(-1));
+
+  protected readonly identiske = computed(() => identicalGroups(this.data.participants()));
+
+  protected readonly tvillinger = computed(() => mostSimilarPairs(this.data.participants(), 3));
 }

@@ -51,6 +51,42 @@
   </hvi-card>
 
   <hvi-card color="accent" variant="tinted" class="block md:col-span-2">
+    <h2 hviHeading size="xs">Tippe-tvillingene <span aria-hidden="true">👯</span></h2>
+    @if (identiske().length > 0) {
+      <p class="mt-1 text-sm text-gray-700">
+        Disse har tippet helt likt på alle {{ total }} spørsmålene - vinner én av dem, må premien
+        deles!
+      </p>
+      <ul class="mt-3 space-y-2">
+        @for (gruppe of identiske(); track gruppe[0].slug) {
+          <li>
+            @for (deltaker of gruppe; track deltaker.slug) {
+              <a hviLink [routerLink]="['/deltaker', deltaker.slug]">{{ deltaker.name }}</a
+              >{{ !$last ? ' · ' : '' }}
+            }
+          </li>
+        }
+      </ul>
+    } @else {
+      <p class="mt-1 text-sm text-gray-700">
+        Ingen har tippet helt likt på alle spørsmålene - men disse parene er ikke langt unna:
+      </p>
+      <ol class="mt-3 list-inside list-decimal space-y-1">
+        @for (par of tvillinger(); track par.a.slug + par.b.slug) {
+          <li>
+            <a hviLink [routerLink]="['/deltaker', par.a.slug]">{{ par.a.name }}</a>
+            og
+            <a hviLink [routerLink]="['/deltaker', par.b.slug]">{{ par.b.name }}</a>
+            <span class="text-sm text-gray-700">
+              ({{ par.alike }} av {{ par.total }} like svar)
+            </span>
+          </li>
+        }
+      </ol>
+    }
+  </hvi-card>
+
+  <hvi-card color="accent" variant="tinted" class="block md:col-span-2">
     <h2 hviHeading size="xs">Norge-barometeret <span aria-hidden="true">🇳🇴</span></h2>
     <p class="mt-1 text-sm text-gray-700">
       Hvem tror mest på Norge? Hver deltaker får en optimisme-poengsum fra 0 til 20 basert på

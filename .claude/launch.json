@@ -4,8 +4,12 @@
     {
       "name": "vm-tipping",
       "runtimeExecutable": "bash",
-      "runtimeArgs": ["-c", "export PATH=\"$HOME/.nvm/versions/node/v24.15.0/bin:$PATH\" && npm start"],
-      "port": 4200
+      "runtimeArgs": [
+        "-c",
+        "export PATH=\"$HOME/.nvm/versions/node/v24.15.0/bin:$PATH\" && npm start -- --port \"${PORT:-4200}\""
+      ],
+      "port": 4200,
+      "autoPort": true
     }
   ]
 }

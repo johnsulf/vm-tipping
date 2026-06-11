@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { HviAlert, HviCard, HviHeading, HviLink, HviTag } from '@helsevestikt/hviktor-angular';
 import { DataService } from '../../core/data.service';
 import { AnswerStatus } from '../../core/scoring';
+import { closestTwin, identicalWith } from '../../core/stats';
 import { CATEGORIES, CATEGORY_LABELS, Question, QUESTIONS } from '../../data/questions';
 
 interface AnswerRow {
@@ -53,6 +54,20 @@ export class ParticipantPage {
       this.title.setTitle(`${name ?? 'Fant ikke deltakeren'} - VM-tipping 2026`);
     });
   }
+
+  /** Andre som har tippet helt likt – de må dele premien. */
+  protected readonly identiske = computed(() => {
+    const participant = this.row()?.participant;
+    return participant ? identicalWith(participant, this.data.participants()) : [];
+  });
+
+  /** Den mest like tipperen, når ingen er helt identiske. */
+  protected readonly tvilling = computed(() => {
+    const participant = this.row()?.participant;
+    return participant && this.identiske().length === 0
+      ? closestTwin(participant, this.data.participants())
+      : undefined;
+  });
 
   protected readonly groups = computed<readonly CategoryGroup[]>(() => {
     const participant = this.row()?.participant;
