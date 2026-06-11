@@ -21,7 +21,7 @@ export const FASIT: Fasit = {
   // 'apningskamp-mal': ,
   // 'apningskamp-straffe': ,
   'apningskamp-corner': 'Mexico',
-  // 'apningskamp-rodt-kort': ,
+  'apningskamp-rodt-kort': 'Ja',
   // --- Norge i VM ---
   // 'norge-progresjon': ,
   // 'norge-poeng': ,
