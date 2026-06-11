@@ -43,14 +43,14 @@ Krever Node 22+ (Angular CLI 22).
 
 ## Deploy til GitHub Pages
 
-```bash
-npm run build:pages   # bygger med --base-href /vm-tipping/
-```
+Deployen skjer automatisk via [.github/workflows/deploy.yml](.github/workflows/deploy.yml)
+ved hver push til `main` (eller manuelt fra Actions-fanen). Workflowen kjører testene, bygger
+med `npm run build:pages` (`--base-href /vm-tipping/`) og publiserer `dist/vm-tipping/browser`.
+
+**Engangsoppsett:** I repo-innstillingene må Settings → Pages → «Build and deployment» →
+Source settes til **GitHub Actions** (ikke «Deploy from a branch» – da serveres bare
+kildekoden, og GitHub viser README-en).
 
 Bygget lager også en `404.html` (kopi av `index.html`) slik at dyplenker som
-`/deltaker/erlend` fungerer på GitHub Pages. Publiser innholdet i `dist/vm-tipping/browser`
-til Pages - enten manuelt eller med en GitHub Actions-workflow som kjører `npm ci` og
-`npm run build:pages` og laster opp `dist/vm-tipping/browser` som Pages-artefakt.
-
-Hvis siden skal ligge på et annet path enn `/vm-tipping/`, juster `--base-href` i
-`build:pages`-scriptet i `package.json`.
+`/deltaker/erlend` fungerer på Pages. Hvis siden skal ligge på et annet path enn
+`/vm-tipping/`, juster `--base-href` i `build:pages`-scriptet i `package.json`.
