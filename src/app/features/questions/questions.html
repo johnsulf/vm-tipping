@@ -1,7 +1,7 @@
 <h1 hviHeading size="lg">Spørsmålene</h1>
 <p class="mt-2 text-gray-700">
-  {{ questionCount }} spørsmål, {{ settledCount() }} avgjort. Klikk på et spørsmål for å se hva
-  alle har svart.
+  {{ questionCount }} spørsmål, {{ settledCount() }} avgjort. Klikk på et spørsmål for å se hva alle
+  har svart.
 </p>
 
 @for (group of groups(); track group.label) {
@@ -14,7 +14,7 @@
             {{ item.question.label }}
           </a>
           @if (item.fasit; as fasit) {
-            <hvi-tag size="sm" color="success">Fasit: {{ fasit }}</hvi-tag>
+            <hvi-tag size="sm" color="success">{{ fasit }}</hvi-tag>
           } @else {
             <hvi-tag size="sm" color="neutral">Uavklart</hvi-tag>
           }

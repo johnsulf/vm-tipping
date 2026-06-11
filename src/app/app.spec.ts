@@ -22,6 +22,6 @@ describe('App', () => {
     await fixture.whenStable();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('header')?.textContent).toContain('VM-tipping 2026');
-    expect(compiled.querySelector('nav')?.textContent).toContain('Leaderboard');
+    expect(compiled.querySelector('nav')?.textContent).toContain('Tabellen');
   });
 });

@@ -5,7 +5,7 @@ export const routes: Routes = [
     path: '',
     loadComponent: () =>
       import('./features/leaderboard/leaderboard').then((m) => m.LeaderboardPage),
-    title: 'Leaderboard - VM-tipping 2026',
+    title: 'Tabellen - VM-tipping 2026',
   },
   {
     path: 'deltaker/:slug',

@@ -1,11 +1,11 @@
 <p>
-  <a hviLink routerLink="/">← Tilbake til leaderboard</a>
+  <a hviLink routerLink="/">← Tilbake til tabellen</a>
 </p>
 
 @if (row(); as r) {
   <h1 hviHeading size="lg" class="mt-4">{{ r.participant.name }}</h1>
 
-  <hvi-card color="neutral" variant="tinted" class="mt-4 block">
+  <hvi-card color="accent" variant="tinted" class="mt-4 block">
     <dl class="flex flex-wrap gap-x-10 gap-y-3">
       <div>
         <dt class="text-sm text-gray-700">Plassering</dt>
@@ -18,7 +18,8 @@
       <div>
         <dt class="text-sm text-gray-700">Riktige svar</dt>
         <dd class="text-2xl font-bold">
-          {{ r.score.correct }}<span class="text-base font-normal text-gray-700">
+          {{ r.score.correct
+          }}<span class="text-base font-normal text-gray-700">
             av {{ r.score.settled }} avgjorte</span
           >
         </dd>
@@ -51,6 +52,6 @@
 } @else {
   <hvi-alert color="warning" title="Fant ikke deltakeren" class="mt-4 block">
     Det finnes ingen deltaker med adressen «{{ slug() }}».
-    <a hviLink routerLink="/">Gå til leaderboardet</a> for å se alle deltakerne.
+    <a hviLink routerLink="/">Gå til tabellen</a> for å se alle deltakerne.
   </hvi-alert>
 }
