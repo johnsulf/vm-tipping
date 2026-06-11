@@ -1,5 +1,5 @@
 <h1 hviHeading size="lg">Statistikk og moro</h1>
-<p class="mt-2 text-gray-700">Litt kuriosa fra tipperunden – helt uten poengverdi.</p>
+<p class="mt-2 text-gray-700">Litt kuriosa fra tipperunden - helt uten poengverdi.</p>
 
 <section class="mt-8">
   <h2 hviHeading size="sm">Hvem vinner VM?</h2>
@@ -18,7 +18,8 @@
           <a hviLink color="neutral" [routerLink]="['/sporsmal', pick.question.id]">
             {{ pick.question.label }}
           </a>
-          – <strong>{{ pick.answer }}</strong>&nbsp;<span class="text-sm text-gray-700">({{ pick.count }} av {{ pick.total }})</span>
+          - <strong>{{ pick.answer }}</strong
+          >&nbsp;<span class="text-sm text-gray-700">({{ pick.count }} av {{ pick.total }})</span>
         </li>
       }
     </ul>
@@ -34,7 +35,7 @@
             {{ outsider.participant.name }}
           </a>
           <span class="text-sm text-gray-700">
-            – {{ outsider.uniqueAnswers.length }} unike svar
+            - {{ outsider.uniqueAnswers.length }} unike svar
           </span>
           @if (outsider.uniqueAnswers.length > 0) {
             <p class="mt-1 text-sm text-gray-600">
@@ -52,8 +53,9 @@
   <hvi-card color="neutral" variant="tinted" class="block md:col-span-2">
     <h2 hviHeading size="xs">Norge-barometeret <span aria-hidden="true">🇳🇴</span></h2>
     <p class="mt-1 text-sm text-gray-700">
-      Hvem tror mest på Norge? Basert på svarene om Norges vei i VM, poeng i gruppespillet,
-      Frankrike-kampen og Haalands målteft.
+      Hvem tror mest på Norge? Hver deltaker får en optimisme-poengsum fra 0 til 20 basert på
+      svarene om Norges vei i VM, poeng i gruppespillet, Frankrike-kampen, gruppe I og Haalands
+      målteft - jo høyere tall, desto større Norge-tro.
     </p>
     <div class="mt-3 grid gap-6 sm:grid-cols-2">
       <div>
@@ -64,7 +66,9 @@
               <a hviLink [routerLink]="['/deltaker', rad.participant.slug]">
                 {{ rad.participant.name }}
               </a>
-              <span class="text-sm text-gray-700">({{ rad.score }} av {{ rad.maxScore }})</span>
+              <span class="text-sm text-gray-700">
+                ({{ rad.score }} av {{ rad.maxScore }} optimisme-poeng)
+              </span>
             </li>
           }
         </ol>
@@ -76,7 +80,9 @@
             <a hviLink [routerLink]="['/deltaker', p.participant.slug]">
               {{ p.participant.name }}
             </a>
-            <span class="text-sm text-gray-700">({{ p.score }} av {{ p.maxScore }})</span>
+            <span class="text-sm text-gray-700">
+              ({{ p.score }} av {{ p.maxScore }} optimisme-poeng)
+            </span>
           </p>
         </div>
       }

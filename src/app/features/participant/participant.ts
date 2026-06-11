@@ -1,4 +1,5 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, effect, inject, input } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { HviAlert, HviCard, HviHeading, HviLink, HviTag } from '@helsevestikt/hviktor-angular';
 import { DataService } from '../../core/data.service';
@@ -43,6 +44,15 @@ export class ParticipantPage {
   protected readonly participantCount = this.data.participants().length;
 
   protected readonly row = computed(() => this.data.leaderboardRow(this.slug()));
+
+  private readonly title = inject(Title);
+
+  constructor() {
+    effect(() => {
+      const name = this.row()?.participant.name;
+      this.title.setTitle(`${name ?? 'Fant ikke deltakeren'} - VM-tipping 2026`);
+    });
+  }
 
   protected readonly groups = computed<readonly CategoryGroup[]>(() => {
     const participant = this.row()?.participant;

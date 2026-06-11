@@ -75,7 +75,7 @@ export const QUESTIONS: readonly Question[] = [
   },
   {
     id: 'norge-frankrike',
-    label: 'Norge–Frankrike 26. juni',
+    label: 'Norge-Frankrike 26. juni',
     text: 'Slår Norge Frankrike 26. juni?',
     category: 'norge',
   },

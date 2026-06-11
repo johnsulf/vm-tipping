@@ -16,20 +16,18 @@ import { AnswerOptions, QuestionId } from './predictions.generated';
 export type Fasit = { readonly [K in QuestionId]?: AnswerOptions[K] };
 
 export const FASIT: Fasit = {
-  // --- Åpningskampen (Mexico – Sør-Afrika, 11. juni) ---
+  // --- Åpningskampen (Mexico - Sør-Afrika, 11. juni) ---
   // 'apningskamp-vinner': ,
   // 'apningskamp-mal': ,
   // 'apningskamp-straffe': ,
   // 'apningskamp-straffe': ,
   // 'apningskamp-corner': ,
   // 'apningskamp-rodt-kort': ,
-
   // --- Norge i VM ---
   // 'norge-progresjon': ,
   // 'norge-poeng': ,
   // 'norge-frankrike': ,
   // 'haaland-mal': ,
-
   // --- Gruppevinnere ---
   // 'gruppe-a': ,
   // 'gruppe-b': ,
@@ -43,7 +41,6 @@ export const FASIT: Fasit = {
   // 'gruppe-j': ,
   // 'gruppe-k': ,
   // 'gruppe-l': ,
-
   // --- Finalen ---
   // 'vm-vinner': ,
   // 'finale-taper': ,
@@ -51,7 +48,6 @@ export const FASIT: Fasit = {
   // 'finale-straffekonk': ,
   // 'finale-rodt-kort': ,
   // 'finale-banestormer': ,
-
   // --- Turneringen ---
   // 'toppskarer': ,
   // 'beste-spiller': ,

@@ -24,9 +24,7 @@ import { AnswerCount } from '../core/scoring';
           <div class="mt-1 h-3 rounded-full bg-gray-200" aria-hidden="true">
             <div
               class="h-3 rounded-full"
-              [class.bg-green-700]="item.status === 'riktig'"
-              [class.bg-gray-400]="item.status === 'galt'"
-              [class.bg-blue-800]="item.status === 'uavklart'"
+              [class]="barColor(item)"
               [style.width.%]="(item.count / total()) * 100"
             ></div>
           </div>
@@ -45,5 +43,16 @@ export class AnswerBars {
 
   protected names(item: AnswerCount): string {
     return item.participants.map((p) => p.name).join(', ');
+  }
+
+  protected barColor(item: AnswerCount): string {
+    switch (item.status) {
+      case 'riktig':
+        return 'bg-green-700';
+      case 'galt':
+        return 'bg-gray-500';
+      default:
+        return 'bg-[#1466B8]';
+    }
   }
 }

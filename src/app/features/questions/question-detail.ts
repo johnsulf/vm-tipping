@@ -1,4 +1,5 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, effect, inject, input } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { HviAlert, HviHeading, HviLink } from '@helsevestikt/hviktor-angular';
 import { DataService } from '../../core/data.service';
@@ -19,6 +20,15 @@ export class QuestionDetailPage {
   protected readonly total = this.data.participants().length;
 
   protected readonly question = computed(() => QUESTIONS.find((q) => q.id === this.id()));
+
+  private readonly title = inject(Title);
+
+  constructor() {
+    effect(() => {
+      const label = this.question()?.label;
+      this.title.setTitle(`${label ?? 'Fant ikke spørsmålet'} - VM-tipping 2026`);
+    });
+  }
 
   protected readonly fasit = computed(() => {
     const question = this.question();

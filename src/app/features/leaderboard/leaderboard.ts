@@ -14,8 +14,4 @@ export class LeaderboardPage {
   protected readonly rows = this.data.leaderboard;
   protected readonly settledCount = this.data.settledCount;
   protected readonly questionCount = this.data.questionCount;
-
-  protected medal(rank: number): string | null {
-    return rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : null;
-  }
 }
