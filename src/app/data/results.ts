@@ -17,9 +17,9 @@ export type Fasit = { readonly [K in QuestionId]?: AnswerOptions[K] };
 
 export const FASIT: Fasit = {
   // --- Åpningskampen (Mexico - Sør-Afrika, 11. juni) ---
-  // 'apningskamp-vinner': ,
-  // 'apningskamp-mal': ,
-  // 'apningskamp-straffe': ,
+  'apningskamp-vinner': 'Mexico',
+  'apningskamp-mal': '2',
+  'apningskamp-straffe': 'Nei',
   'apningskamp-corner': 'Mexico',
   'apningskamp-rodt-kort': 'Ja',
   // --- Norge i VM ---
