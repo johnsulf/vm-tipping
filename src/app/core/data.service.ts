@@ -34,6 +34,30 @@ export class DataService {
     );
   });
 
+  readonly sectionRanks: Signal<ReadonlyMap<string, number>> = computed(() => {
+    const ranks = new Map<string, number>();
+    const bySection = new Map<string, LeaderboardRow[]>();
+    for (const row of this.leaderboard()) {
+      const section = PARTICIPANT_SECTIONS[row.participant.slug];
+      if (!section) continue;
+      const list = bySection.get(section) ?? [];
+      list.push(row);
+      bySection.set(section, list);
+    }
+    for (const rows of bySection.values()) {
+      let rank = 0;
+      let prevPoints = -1;
+      rows.forEach((row, i) => {
+        if (row.score.points !== prevPoints) {
+          rank = i + 1;
+          prevPoints = row.score.points;
+        }
+        ranks.set(row.participant.slug, rank);
+      });
+    }
+    return ranks;
+  });
+
   /** Antall spørsmål som har fått fasit. */
   readonly settledCount = computed(
     () => QUESTION_IDS.filter((id) => (this.fasit()[id] ?? '').trim() !== '').length,

@@ -37,6 +37,8 @@
       <tr>
         <th scope="col">Plass</th>
         <th scope="col">Navn</th>
+        <th scope="col">Seksjon</th>
+        <th scope="col">Plass i seksjon</th>
         <th scope="col">Poeng</th>
       </tr>
     </thead>
@@ -49,6 +51,8 @@
               {{ row.participant.name }}
             </a>
           </td>
+          <td>{{ sectionOf(row.participant.slug) }}</td>
+          <td>{{ sectionRankOf(row.participant.slug) }}.</td>
           <td>{{ row.score.points }}</td>
         </tr>
       }
