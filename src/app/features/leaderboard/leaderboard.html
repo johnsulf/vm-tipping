@@ -11,6 +11,23 @@
   </p>
 }
 
+<fieldset class="mt-4 flex flex-wrap gap-2" aria-label="Filtrer etter seksjon">
+  <label hviChip>
+    <input hviInput type="radio" name="section-filter" value="Alle"
+      [checked]="activeSection() === 'Alle'"
+      (change)="setSection('Alle')" />
+    Hele hurven
+  </label>
+  @for (section of sections; track section) {
+    <label hviChip>
+      <input hviInput type="radio" name="section-filter" [value]="section"
+        [checked]="activeSection() === section"
+        (change)="setSection(section)" />
+      {{ section }}
+    </label>
+  }
+</fieldset>
+
 <div class="mt-6 overflow-x-auto">
   <table hviTable zebra hover border class="w-full">
     <caption class="sr-only">

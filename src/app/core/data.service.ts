@@ -1,7 +1,8 @@
-import { computed, Injectable, Signal } from '@angular/core';
+import { computed, Injectable, signal, Signal } from '@angular/core';
 import { Participant, PARTICIPANTS, QuestionId } from '../data/predictions.generated';
 import { QUESTIONS } from '../data/questions';
 import { FASIT } from '../data/results';
+import { PARTICIPANT_SECTIONS, Section, SECTIONS } from '../data/sections';
 import {
   AnswerCount,
   answerDistribution,
@@ -18,9 +19,20 @@ export class DataService {
   readonly participants: Signal<readonly Participant[]> = computed(() => PARTICIPANTS);
   readonly fasit = computed(() => FASIT);
 
+  readonly sections = SECTIONS;
+  readonly activeSection = signal<Section | 'Alle'>('Alle');
+
   readonly leaderboard: Signal<readonly LeaderboardRow[]> = computed(() =>
     buildLeaderboard(this.participants(), this.fasit(), QUESTION_IDS),
   );
+
+  readonly filteredLeaderboard: Signal<readonly LeaderboardRow[]> = computed(() => {
+    const section = this.activeSection();
+    if (section === 'Alle') return this.leaderboard();
+    return this.leaderboard().filter(
+      (row) => PARTICIPANT_SECTIONS[row.participant.slug] === section,
+    );
+  });
 
   /** Antall spørsmål som har fått fasit. */
   readonly settledCount = computed(
