@@ -58,6 +58,25 @@ export class DataService {
     return ranks;
   });
 
+  /** Gjennomsnittlig poeng per seksjon. */
+  readonly sectionLeaderboard: Signal<
+    readonly { section: Section; avgPoints: number; memberCount: number }[]
+  > = computed(() => {
+    const bySection = new Map<Section, number[]>();
+    for (const row of this.leaderboard()) {
+      const section = PARTICIPANT_SECTIONS[row.participant.slug];
+      if (!section) continue;
+      const list = bySection.get(section) ?? [];
+      list.push(row.score.points);
+      bySection.set(section, list);
+    }
+    return SECTIONS.map((section) => {
+      const points = bySection.get(section) ?? [];
+      const avg = points.length > 0 ? points.reduce((a, b) => a + b, 0) / points.length : 0;
+      return { section, avgPoints: avg, memberCount: points.length };
+    }).sort((a, b) => b.avgPoints - a.avgPoints);
+  });
+
   /** Antall spørsmål som har fått fasit. */
   readonly settledCount = computed(
     () => QUESTION_IDS.filter((id) => (this.fasit()[id] ?? '').trim() !== '').length,

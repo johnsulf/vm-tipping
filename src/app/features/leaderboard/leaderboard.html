@@ -11,51 +11,84 @@
   </p>
 }
 
-<fieldset class="mt-4 flex flex-wrap gap-2" aria-label="Filtrer etter seksjon">
-  <label hviChip>
-    <input hviInput type="radio" name="section-filter" value="Alle"
-      [checked]="activeSection() === 'Alle'"
-      (change)="setSection('Alle')" />
-    Hele hurven
-  </label>
-  @for (section of sections; track section) {
-    <label hviChip>
-      <input hviInput type="radio" name="section-filter" [value]="section"
-        [checked]="activeSection() === section"
-        (change)="setSection(section)" />
-      {{ section }}
-    </label>
-  }
-</fieldset>
+<hvi-toggle-group class="mt-4" [value]="view()" (valueChange)="view.set($any($event))" aria-label="Velg visning">
+  <button hviToggleGroupItem value="spillere">Spillere</button>
+  <button hviToggleGroupItem value="seksjoner">Seksjoner</button>
+</hvi-toggle-group>
 
-<div class="mt-6 overflow-x-auto">
-  <table hviTable zebra hover border class="w-full">
-    <caption class="sr-only">
-      Rangering av deltakerne i tippekonkurransen etter antall poeng
-    </caption>
-    <thead>
-      <tr>
-        <th scope="col">Plass</th>
-        <th scope="col">Navn</th>
-        <th scope="col">Seksjon</th>
-        <th scope="col">Plass i seksjon</th>
-        <th scope="col">Poeng</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (row of rows(); track row.participant.slug) {
+@if (view() === 'spillere') {
+  <fieldset class="mt-4 flex flex-wrap gap-2" aria-label="Filtrer etter seksjon">
+    <label hviChip>
+      <input hviInput type="radio" name="section-filter" value="Alle"
+        [checked]="activeSection() === 'Alle'"
+        (change)="setSection('Alle')" />
+      Hele hurven
+    </label>
+    @for (section of sections; track section) {
+      <label hviChip>
+        <input hviInput type="radio" name="section-filter" [value]="section"
+          [checked]="activeSection() === section"
+          (change)="setSection(section)" />
+        {{ section }}
+      </label>
+    }
+  </fieldset>
+
+  <div class="mt-6 overflow-x-auto">
+    <table hviTable zebra hover border class="w-full">
+      <caption class="sr-only">
+        Rangering av deltakerne i tippekonkurransen etter antall poeng
+      </caption>
+      <thead>
         <tr>
-          <td>{{ row.rank }}.</td>
-          <td>
-            <a hviLink [routerLink]="['/deltaker', row.participant.slug]">
-              {{ row.participant.name }}
-            </a>
-          </td>
-          <td>{{ sectionOf(row.participant.slug) }}</td>
-          <td>{{ sectionRankOf(row.participant.slug) }}.</td>
-          <td>{{ row.score.points }}</td>
+          <th scope="col">Plass</th>
+          <th scope="col">Navn</th>
+          <th scope="col">Seksjon</th>
+          <th scope="col">Plass i seksjon</th>
+          <th scope="col">Poeng</th>
         </tr>
-      }
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        @for (row of rows(); track row.participant.slug) {
+          <tr>
+            <td>{{ row.rank }}.</td>
+            <td>
+              <a hviLink [routerLink]="['/deltaker', row.participant.slug]">
+                {{ row.participant.name }}
+              </a>
+            </td>
+            <td>{{ sectionOf(row.participant.slug) }}</td>
+            <td>{{ sectionRankOf(row.participant.slug) }}.</td>
+            <td>{{ row.score.points }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+} @else {
+  <div class="mt-6 overflow-x-auto">
+    <table hviTable zebra hover border class="w-full">
+      <caption class="sr-only">
+        Rangering av seksjoner etter gjennomsnittlig poengsum
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">Plass</th>
+          <th scope="col">Seksjon</th>
+          <th scope="col">Antall</th>
+          <th scope="col">Poengsnitt</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of sectionLeaderboard(); track row.section; let i = $index) {
+          <tr>
+            <td>{{ i + 1 }}.</td>
+            <td>{{ row.section }}</td>
+            <td>{{ row.memberCount }}</td>
+            <td>{{ row.avgPoints | number:'1.1-1' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+}
