@@ -58,22 +58,22 @@ export class DataService {
     return ranks;
   });
 
-  /** Gjennomsnittlig poeng per seksjon. */
+  /** Gjennomsnittlig poeng per seksjon med medlemmer. */
   readonly sectionLeaderboard: Signal<
-    readonly { section: Section; avgPoints: number; memberCount: number }[]
+    readonly { section: Section; avgPoints: number; memberCount: number; members: readonly LeaderboardRow[] }[]
   > = computed(() => {
-    const bySection = new Map<Section, number[]>();
+    const bySection = new Map<Section, LeaderboardRow[]>();
     for (const row of this.leaderboard()) {
       const section = PARTICIPANT_SECTIONS[row.participant.slug];
       if (!section) continue;
       const list = bySection.get(section) ?? [];
-      list.push(row.score.points);
+      list.push(row);
       bySection.set(section, list);
     }
     return SECTIONS.map((section) => {
-      const points = bySection.get(section) ?? [];
-      const avg = points.length > 0 ? points.reduce((a, b) => a + b, 0) / points.length : 0;
-      return { section, avgPoints: avg, memberCount: points.length };
+      const members = bySection.get(section) ?? [];
+      const avg = members.length > 0 ? members.reduce((a, b) => a + b.score.points, 0) / members.length : 0;
+      return { section, avgPoints: avg, memberCount: members.length, members };
     }).sort((a, b) => b.avgPoints - a.avgPoints);
   });
 

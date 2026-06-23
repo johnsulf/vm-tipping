@@ -3,6 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import {
   HviAlert,
+  HviButton,
   HviChipLabel,
   HviHeading,
   HviInput,
@@ -20,6 +21,7 @@ import { PARTICIPANT_SECTIONS, Section } from '../../data/sections';
     DecimalPipe,
     RouterLink,
     HviAlert,
+    HviButton,
     HviChipLabel,
     HviHeading,
     HviInput,

@@ -35,7 +35,7 @@
   </fieldset>
 
   <div class="mt-6 overflow-x-auto">
-    <table hviTable zebra hover border class="w-full">
+    <table hviTable zebra border class="w-full">
       <caption class="sr-only">
         Rangering av deltakerne i tippekonkurransen etter antall poeng
       </caption>
@@ -67,26 +67,69 @@
   </div>
 } @else {
   <div class="mt-6 overflow-x-auto">
-    <table hviTable zebra hover border class="w-full">
+    <table hviTable border class="w-full"
+      #sectionTable="hviTable"
+      [value]="$any(sectionLeaderboard())"
+      rowId="section">
       <caption class="sr-only">
         Rangering av seksjoner etter gjennomsnittlig poengsum
       </caption>
       <thead>
         <tr>
+          <th scope="col" style="width: 3rem"><span class="sr-only">Utvid</span></th>
           <th scope="col">Plass</th>
           <th scope="col">Seksjon</th>
-          <th scope="col">Antall</th>
+          <th scope="col">Spillere</th>
           <th scope="col">Poengsnitt</th>
         </tr>
       </thead>
       <tbody>
         @for (row of sectionLeaderboard(); track row.section; let i = $index) {
           <tr>
+            <td>
+              <button hviButton variant="tertiary" size="sm"
+                (click)="sectionTable.toggleExpanded(row)"
+                [attr.aria-expanded]="sectionTable.isExpanded(row)"
+                [attr.aria-controls]="'seksjon-detalj-' + i"
+                [attr.aria-label]="sectionTable.isExpanded(row)
+                  ? 'Skjul spillere i ' + row.section
+                  : 'Vis spillere i ' + row.section">
+                {{ sectionTable.isExpanded(row) ? 'Lukk' : 'Utvid' }}
+              </button>
+            </td>
             <td>{{ i + 1 }}.</td>
             <td>{{ row.section }}</td>
             <td>{{ row.memberCount }}</td>
             <td>{{ row.avgPoints | number:'1.1-1' }}</td>
           </tr>
+          @if (sectionTable.isExpanded(row)) {
+            <tr [id]="'seksjon-detalj-' + i">
+              <td colspan="5">
+                <table class="w-full" aria-label="Spillere i {{ row.section }}">
+                  <thead class="sr-only">
+                    <tr>
+                      <th scope="col">Totalplassering</th>
+                      <th scope="col">Navn</th>
+                      <th scope="col">Poeng</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (member of row.members; track member.participant.slug) {
+                      <tr>
+                        <td class="w-16 py-1 text-gray-500">{{ member.rank }}.</td>
+                        <td class="py-1">
+                          <a hviLink [routerLink]="['/deltaker', member.participant.slug]">
+                            {{ member.participant.name }}
+                          </a>
+                        </td>
+                        <td class="w-16 py-1 text-right">{{ member.score.points }}</td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          }
         }
       </tbody>
     </table>
