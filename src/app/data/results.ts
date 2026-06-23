@@ -37,7 +37,7 @@ export const FASIT: Fasit = {
   // 'gruppe-g': ,
   // 'gruppe-h': ,
   // 'gruppe-i': ,
-  // 'gruppe-j': ,
+  'gruppe-j': 'Argentina',
   // 'gruppe-k': ,
   // 'gruppe-l': ,
   // --- Finalen ---
