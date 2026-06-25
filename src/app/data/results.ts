@@ -29,8 +29,8 @@ export const FASIT: Fasit = {
   // 'haaland-mal': ,
   // --- Gruppevinnere ---
   'gruppe-a': 'Mexico',
-  // 'gruppe-b': ,
-  // 'gruppe-c': ,
+  'gruppe-b': 'Sveits',
+  'gruppe-c': 'Brasil',
   'gruppe-d': 'USA',
   'gruppe-e': 'Tyskland',
   // 'gruppe-f': ,
