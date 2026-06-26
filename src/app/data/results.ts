@@ -33,7 +33,7 @@ export const FASIT: Fasit = {
   'gruppe-c': 'Brasil',
   'gruppe-d': 'USA',
   'gruppe-e': 'Tyskland',
-  // 'gruppe-f': ,
+  'gruppe-f': 'Nederland',
   // 'gruppe-g': ,
   // 'gruppe-h': ,
   // 'gruppe-i': ,
