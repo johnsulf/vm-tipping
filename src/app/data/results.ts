@@ -24,8 +24,8 @@ export const FASIT: Fasit = {
   'apningskamp-rodt-kort': 'Ja',
   // --- Norge i VM ---
   // 'norge-progresjon': ,
-  // 'norge-poeng': ,
-  // 'norge-frankrike': ,
+  'norge-poeng': '4-6 poeng',
+  'norge-frankrike': 'Nei, Frankrike vinner',
   // 'haaland-mal': ,
   // --- Gruppevinnere ---
   'gruppe-a': 'Mexico',
@@ -34,9 +34,9 @@ export const FASIT: Fasit = {
   'gruppe-d': 'USA',
   'gruppe-e': 'Tyskland',
   'gruppe-f': 'Nederland',
-  // 'gruppe-g': ,
-  // 'gruppe-h': ,
-  // 'gruppe-i': ,
+  'gruppe-g': 'Belgia',
+  'gruppe-h': 'Spania',
+  'gruppe-i': 'Frankrike',
   'gruppe-j': 'Argentina',
   // 'gruppe-k': ,
   // 'gruppe-l': ,
