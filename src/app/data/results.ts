@@ -38,8 +38,8 @@ export const FASIT: Fasit = {
   'gruppe-h': 'Spania',
   'gruppe-i': 'Frankrike',
   'gruppe-j': 'Argentina',
-  // 'gruppe-k': ,
-  // 'gruppe-l': ,
+  'gruppe-k': 'Colombia',
+  'gruppe-l': 'England',
   // --- Finalen ---
   // 'vm-vinner': ,
   // 'finale-taper': ,
