@@ -23,10 +23,10 @@ export const FASIT: Fasit = {
   'apningskamp-corner': 'Mexico',
   'apningskamp-rodt-kort': 'Ja',
   // --- Norge i VM ---
-  // 'norge-progresjon': ,
+  'norge-progresjon': 'Til kvartfinale',
   'norge-poeng': '4-6 poeng',
   'norge-frankrike': 'Nei, Frankrike vinner',
-  // 'haaland-mal': ,
+  'haaland-mal': '5 mål eller flere',
   // --- Gruppevinnere ---
   'gruppe-a': 'Mexico',
   'gruppe-b': 'Sveits',
