@@ -49,7 +49,7 @@ export const FASIT: Fasit = {
   'finale-banestormer': 'Nei',
   // --- Turneringen ---
   toppskarer: 'Kylian Mbappé (Frankrike)',
-  //'beste-spiller': 'Lionel Messi (Argentina)',
+  'beste-spiller': 'Rodri (Spania)',
   'totalt-mal': 'Over 290 mål',
   'flest-gule-kort': 'Argentina',
   'flest-rode-kort': 'Sør-Afrika',
